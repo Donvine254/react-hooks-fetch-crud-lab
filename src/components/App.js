@@ -3,24 +3,36 @@ import AdminNavBar from "./AdminNavBar";
 import QuestionForm from "./QuestionForm";
 import QuestionList from "./QuestionList";
 
-const baseUrl="http://localhost:4000/questions"
+const baseUrl = "http://localhost:4000/questions";
 
 function App() {
   const [page, setPage] = useState("List");
-  const [questions, setQuestions]= useState([]);
-
+  const [questions, setQuestions] = useState([]);
 
   //fetch the questions using useEffect
   useEffect(() => {
-    fetch(baseUrl).then(response=>response.json())
-    .then(data=>setQuestions(data))
-  }, [])
-  
+    try {
+      async function getQuestions() {
+        const response = await fetch(baseUrl);
+        if (response.ok) {
+          const data = await response.json();
+          setQuestions(data);
+        } else throw new Error("Request failed with status " + response.status);
+      }
+      getQuestions();
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
 
   return (
     <main>
       <AdminNavBar onChangePage={setPage} />
-      {page === "Form" ? <QuestionForm /> : <QuestionList questions={questions} />}
+      {page === "Form" ? (
+        <QuestionForm />
+      ) : (
+        <QuestionList questions={questions} />
+      )}
     </main>
   );
 }
