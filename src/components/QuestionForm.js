@@ -23,17 +23,25 @@ function QuestionForm({ addQuestion }) {
     if (isEmpty) {
       alert("Please fill out all fields");
       return;
-    } 
-      fetch("http://localhost:4000/questions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-        .then((res) => res.json())
-        .then((newItem) => addQuestion(newItem));
-
+    }
+    fetch("http://localhost:4000/questions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        prompt: formData.prompt,
+        answers: [
+          formData.answer1,
+          formData.answer2,
+          formData.answer3,
+          formData.answer4,
+        ],
+        correctIndex: parseInt(formData.correctIndex),
+      }),
+    })
+      .then((res) => res.json())
+      .then((newItem) => addQuestion(newItem));
   }
 
   return (

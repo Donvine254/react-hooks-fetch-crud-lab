@@ -23,7 +23,7 @@ function App() {
     } catch (error) {
       console.error(error);
     }
-  }, [questions]);
+  }, []);
 
   //function to add new questions
   function handleNewQuestions(newQuiz){
@@ -37,7 +37,7 @@ function App() {
       {page === "Form" ? (
         <QuestionForm addQuestion={handleNewQuestions}/>
       ) : (
-        <QuestionList questions={questions} />
+        <QuestionList />
       )}
     </main>
   );
