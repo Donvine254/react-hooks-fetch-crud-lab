@@ -6,7 +6,8 @@ function QuestionList({questions}) {
   return (
     <section>
       <h1>Quiz Questions</h1>
-      <ul>{questions.map((question)=><QuestionItem key={question.id} question={question}/>)}</ul>
+      {questions?<ul>{questions.map((question)=><QuestionItem key={question.id} question={question}/>)}</ul>:<p>No Questions Found</p>}
+      
     </section>
   );
 }
