@@ -30,6 +30,11 @@ function App() {
     console.log(newQuiz);
     setQuestions((prevQuiz)=>[...prevQuiz, newQuiz])
   }
+  //function to remove the deleted questions
+  function deleteQuestions(question){
+    const updatedQuestions =questions.filter((existingQuestions)=>existingQuestions.id !== question.id)
+    setQuestions(updatedQuestions);
+  }
 
   return (
     <main>
@@ -37,7 +42,7 @@ function App() {
       {page === "Form" ? (
         <QuestionForm addQuestion={handleNewQuestions}/>
       ) : (
-        <QuestionList questions={questions}/>
+        <QuestionList questions={questions} onDelete={deleteQuestions}/>
       )}
     </main>
   );
