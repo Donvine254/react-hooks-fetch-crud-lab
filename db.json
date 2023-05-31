@@ -76,6 +76,17 @@
       ],
       "correctIndex": 0,
       "id": 7
+    },
+    {
+      "prompt": "who is the worst president of kenya",
+      "answers": [
+        "Uhuru Kenyatta",
+        "Jomo Kenyatta",
+        "Mwai Kibaki",
+        "Moi"
+      ],
+      "correctIndex": 3,
+      "id": 8
     }
   ]
 }

@@ -42,6 +42,7 @@ function QuestionForm({ addQuestion }) {
     })
       .then((res) => res.json())
       .then((newItem) => addQuestion(newItem));
+      event.target.value=""
   }
 
   return (

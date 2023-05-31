@@ -37,7 +37,7 @@ function App() {
       {page === "Form" ? (
         <QuestionForm addQuestion={handleNewQuestions}/>
       ) : (
-        <QuestionList />
+        <QuestionList questions={questions}/>
       )}
     </main>
   );
