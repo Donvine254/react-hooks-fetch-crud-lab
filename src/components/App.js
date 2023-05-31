@@ -23,13 +23,19 @@ function App() {
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [questions]);
+
+  //function to add new questions
+  function handleNewQuestions(newQuiz){
+    console.log(newQuiz);
+    setQuestions((prevQuiz)=>[...prevQuiz, newQuiz])
+  }
 
   return (
     <main>
       <AdminNavBar onChangePage={setPage} />
       {page === "Form" ? (
-        <QuestionForm />
+        <QuestionForm addQuestion={handleNewQuestions}/>
       ) : (
         <QuestionList questions={questions} />
       )}

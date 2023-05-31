@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function QuestionForm(props) {
+function QuestionForm({ addQuestion }) {
   const [formData, setFormData] = useState({
     prompt: "",
     answer1: "",
@@ -19,7 +19,21 @@ function QuestionForm(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(formData);
+    const isEmpty = Object.values(formData).some((value) => value === ""); //checking for empty values
+    if (isEmpty) {
+      alert("Please fill out all fields");
+      return;
+    } 
+      fetch("http://localhost:4000/questions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((res) => res.json())
+        .then((newItem) => addQuestion(newItem));
+
   }
 
   return (
@@ -76,8 +90,7 @@ function QuestionForm(props) {
           <select
             name="correctIndex"
             value={formData.correctIndex}
-            onChange={handleChange}
-          >
+            onChange={handleChange}>
             <option value="0">{formData.answer1}</option>
             <option value="1">{formData.answer2}</option>
             <option value="2">{formData.answer3}</option>
